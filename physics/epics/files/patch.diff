@@ -1,0 +1,11 @@
+--- configure/CONFIG_SITE.orig	2014-10-04 22:39:21.000000000 +0200
++++ configure/CONFIG_SITE	2014-10-04 19:17:15.000000000 +0200
+@@ -173,7 +173,7 @@
+ #  Installation directory
+ # If you don't want to install into $(TOP) dir then
+ # define INSTALL_LOCATION here
+-#INSTALL_LOCATION=<fullpathname>
++INSTALL_LOCATION=/opt/epics2
+ 
+ # Use POSIX thread priority scheduling (YES or NO)
+ USE_POSIX_THREAD_PRIORITY_SCHEDULING = NO

@@ -1,0 +1,118 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+PortSystem          1.0
+name                epics
+version             3.14.12
+supported_archs     i386 x86_64
+categories          physics
+platforms           darwin
+maintainers         nomaintainer
+description         EPICS Base Release 3.14.12
+
+long_description    EPICS is a set of software tools and applications \
+                    which provide a software infrastructure for use in \
+                    building distributed control systems to operate devices \
+                    such as Particle Accelerators, Large Experiments and \
+                    major Telescopes. Such distributed control systems \
+                    typically comprise tens or even hundreds of computers, \
+                    networked together to allow communication between them \
+                    and to provide control and feedback of the various parts \
+                    of the device from a central control room, or even \
+                    remotely over the internet.
+
+homepage            http://www.aps.anl.gov/epics/
+#distfiles           baseR3.14.12.4.tar.gz
+distname            baseR3.14.12.4
+use_bzip2           no
+extract.mkdir       yes
+extract.post_args   "| tar --strip-components=1 -zxf - "
+#patch.dir           ${worksrcpath}
+#patchfiles         patch.diff
+
+master_sites        http://www.aps.anl.gov/epics/download/base
+checksums           sha256   0ea4a74e83ff73d68b64de89bedf7c42102edc2cc69c69fd49eb35c04dc9e3de \
+                    rmd160   1e1e7a6d4a58fb4cb95e94a1da0877e63a628724
+
+
+destroot.cmd        
+destroot.keepdirs
+
+##########################
+## FETCHING SOURCES
+##########################
+#fetch {}
+
+##########################
+## CHECKING CHECKSUM
+##########################
+#checksum {}
+
+##########################
+## EXCTRACTING ARCHIVE
+##########################
+#extract {}
+
+##########################
+## APPLYING PATCH
+##########################
+patch {}
+post-patch {
+    ui_msg "------------------------------------------------------------"
+    ui_msg "THIS IS PAVEL MASLOV"
+    ui_msg "${worksrcpath}"
+    ui_msg "${workpath}"
+    ui_msg "${distpath}"
+    ui_msg "${destroot}"
+    ui_msg "------------------------------------------------------------"
+}
+
+##########################
+## CONFIGURE BEFORE BUILD
+##########################
+configure {}
+
+##########################
+## BUILDING
+##########################
+#build {}
+
+##########################
+## TESTING
+##########################
+test {}
+
+##########################
+## DESTROOTING
+##########################
+destroot {
+    ui_msg "------------------------------------------------------------"
+    xinstall -d ${destroot}${prefix}/epics/base
+    xinstall -d ${destroot}${prefix}/epics/base/bin
+    xinstall -d ${destroot}${prefix}/epics/base/bin/darwin-x86
+    xinstall -d ${destroot}${prefix}/epics/base/dbd
+    xinstall -d ${destroot}${prefix}/epics/base/lib/darwin-x86
+    xinstall -m 750 ${worksrcpath}/README ${destroot}${prefix}/epics/base
+    eval xinstall -m 750 [glob ${worksrcpath}/bin/darwin-x86/*] ${destroot}${prefix}/epics/base/bin/darwin-x86
+    eval xinstall -m 750 [glob ${worksrcpath}/lib/darwin-x86/*] ${destroot}${prefix}/epics/base/lib/darwin-x86
+    eval xinstall -m 750 [glob ${worksrcpath}/dbd/*] ${destroot}${prefix}/epics/base/dbd
+    ui_msg "------------------------------------------------------------"
+}
+##########################
+## INSTALLING LOCALLY
+## ${prefix}/var/macports/software
+##########################
+pre-install {
+    ui_msg "------------------------------------------------------------"
+    ui_msg "INSTALLING"
+    ui_msg "------------------------------------------------------------"
+}
+
+##########################
+## ACTIVATING
+##########################
+#activate {}
+
+##########################
+## CLEANING
+##########################
+#clean {}
